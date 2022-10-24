@@ -1,0 +1,41 @@
+<div class="body">
+    <div class="login">
+        <!--Mandamos a llamar el spiner previo al acceso-->
+        <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
+
+
+        <form *ngIf="!loading" [formGroup]="form">
+            <h1></h1>
+            <img src="../../../assets/img/user-icon.png" width="50%">
+
+            <h1>QUARKUS APP</h1>
+            <mat-form-field appearance="fill" class="ancho">
+                <mat-label>username</mat-label>
+                <input matInput autocomplete="off" formControlName="username" required>
+                <mat-error *ngIf="username.invalid && (username.touched || username.dirty)">*El usuario es requerido</mat-error>
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill" class="ancho">
+                <mat-label>password</mat-label>
+                <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                <input matInput #password [type]="toggle.type" placeholder="password" autocomplete="off" formControlName="password" required>
+                <!-- <mat-hint>{{password.value.length}}/{{passwordComponent.max}}</mat-hint> -->
+                <mat-error *ngIf="password.invalid && (password.touched || password.dirty)">*La contraseña es requerida</mat-error>
+
+            </mat-form-field>
+ 
+           
+            <br>
+            <br>
+            <!--Dejamos el boton deshabilitado siempre que sea invalido el formulario-->
+            <button type="submit" (click)="login()" mat-raised-button color="primary" class="ancho button"
+                [disabled]="form.invalid">login</button>
+            <h1></h1>
+            <a routerLink="/forgot-password" routerLinkActive="active" class="ancho button">Forgot your password?</a>
+            <h1></h1>
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,19 @@
+
+footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: rgb(64, 64, 219);
+}
+
+span{
+    display: flex;
+    justify-content: space-around;
+    top: 15px; left: 235px;
+    float: none !important;
+    text-align: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 90%;
+}

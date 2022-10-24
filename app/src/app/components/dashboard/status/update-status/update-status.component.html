@@ -1,0 +1,28 @@
+<div class="container">
+    <mat-toolbar>
+        <span>Update status</span>
+    </mat-toolbar>
+
+    <mat-card style="margin-top: 10px;">
+        <form [formGroup]="form">
+            <br>
+            <mat-grid-list cols="4" rowHeight="70px">
+                <mat-grid-tile [colspan]="1" [rowspan]="2">
+                    <mat-form-field class="ancho">
+                        <mat-label>Rele name</mat-label>
+                        <input matInput autocomplete="off" type="text" formControlName="name" required [(ngModel)]="status.name"> 
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="3" [rowspan]="6">
+                    <img src="../../../../../assets/img/Roles.png">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <button mat-raised-button style="margin-right: 20px;" color="accent" routerLink="/dashboard/status">Cancel</button>
+                    <button mat-raised-button type="submit" color="primary" (click)="updateStatus()">Update</button>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <br>
+        </form>
+    </mat-card>
+</div>
+

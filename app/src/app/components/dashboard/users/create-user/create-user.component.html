@@ -1,0 +1,121 @@
+<div class="container">
+    <mat-toolbar>
+        <span>Create new user</span>
+    </mat-toolbar>
+
+    <mat-card style="margin-top: 10px;">
+        <form [formGroup]="form">
+            <br>
+            <mat-grid-list cols="4" rowHeight="70px">
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Name</mat-label>
+                        <input matInput autocomplete="off" type="text" formControlName="name" required
+                            [(ngModel)]="user.name">
+                    </mat-form-field>
+                    
+                </mat-grid-tile>
+<!-- 
+                <mat-grid-tile [colspan]="3" [rowspan]="6">
+                    <img src="../../../../../assets/img/Roles.png">
+                </mat-grid-tile>
+  -->
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput autocomplete="off" type="text" formControlName="lastName" required
+                            [(ngModel)]="user.lastName">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Username</mat-label>
+                        <input matInput autocomplete="off" type="text" formControlName="username" required
+                            [(ngModel)]="user.username">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Email</mat-label>
+                        <input matInput autocomplete="off" type="email" formControlName="email" required
+                            [(ngModel)]="user.email">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Phone</mat-label>
+                        <input matInput autocomplete="off" type="tel" formControlName="phone" required
+                            [(ngModel)]="user.phone">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Role</mat-label>
+                        <mat-select formControlName="crole"> 
+                            <mat-option *ngFor="let role of roles" [value]="role">
+                                {{ role.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Password</mat-label>
+                        <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                        <input matInput autocomplete="off" #password [type]="toggle.type" type="password" formControlName="password" required [(ngModel)]="user.password">
+                        <mat-hint>{{password.value.length}}/15</mat-hint>
+                         <!-- Esto es para mostrar a manera de carga lo que si se tiene -->
+                         <mat-password-strength #passwordComponent
+                         (onStrengthChanged)="onStrengthChangeds($event)" [password]="password.value">
+                     </mat-password-strength>
+                    </mat-form-field>
+                </mat-grid-tile>
+                                
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <!-- Con esto mostramos las reglas de construccion del password-->
+                    <button class="example-margin" mat-raised-button type="submit" color="primary"
+                         (click)="showDetails = true">validate password
+                    </button>
+                    
+                </mat-grid-tile>
+
+
+                <!-- Mensaje de cumplimiento de reglas de password -->
+                <mat-grid-tile [colspan]="2" [rowspan]="4">
+                    <mat-password-strength-info *ngIf="showDetails" class="expand"
+                        [min]="8"
+                        [max]="15"
+                        [lowerCaseCriteriaMsg]="'Contiene al menos una minúscula'"
+                        [upperCaseCriteriaMsg]="'Contiene al menos una mayúscula'"
+                        [specialCharsCriteriaMsg]="'Contiene un caracter especial'"
+                        [digitsCriteriaMsg]="'Contiene al menos un número'"
+                        [minCharsCriteriaMsg]="'Logitud minima de minima de 8 caracteres, máxima de 30'"
+                        [passwordComponent]="passwordComponent">
+                    </mat-password-strength-info>   
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1"></mat-grid-tile>
+
+
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <button mat-raised-button style="margin-right: 20px; width: 30%;" color="accent" routerLink="/dashboard/users">Cancel</button>
+                    <button mat-raised-button style="margin-right: 20px; width: 30%;" [disabled]="form.invalid" type="submit" color="primary" (click)="save()">Save</button>
+                </mat-grid-tile>
+
+
+            </mat-grid-list>
+            <br>
+        </form>
+    </mat-card>
+</div>

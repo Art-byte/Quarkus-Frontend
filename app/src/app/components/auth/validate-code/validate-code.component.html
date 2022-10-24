@@ -1,0 +1,26 @@
+<div class="body">
+    <div class="resetPass">
+        
+       <form [formGroup]="formCode" > 
+        <h1></h1>
+        <h1>INSERT CODE</h1>
+        <mat-form-field appearance="fill" class="ancho">
+            <mat-label>Username</mat-label>
+            <input matInput autocomplete="off" type="text" formControlName="username">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="ancho">
+            <mat-label>Code</mat-label>
+            <input matInput autocomplete="off" type="password" formControlName="accesCode">
+        </mat-form-field>
+        <br>
+        <!--Dejamos el boton deshabilitado siempre que sea invalido el formulario-->
+        <button type="submit" mat-raised-button color="primary" (click)="sendCredentials()" class="ancho button" [disabled]="formCode.invalid">Validate code</button>
+        <br>
+        <br>
+        <button type="submit" routerLink="/login" mat-raised-button color="accent" class="ancho button">Cancel</button>
+
+        <h1></h1>
+
+    </form>
+    </div>
+</div>

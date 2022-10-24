@@ -1,0 +1,170 @@
+<div class="container">
+
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+
+        <mat-card style="margin-top: 10px;"></mat-card>
+
+        <mat-tab label="User info">
+            <div>
+                <br>
+                <img mat-card-image src="{{urlEndPoint}}/users/profilePicture/view/photo/{{user.profilePicture}}"
+                    class="fotoControl">
+            </div>
+            <br>
+
+            <!-- ============================================================= -->
+            <form [formGroup]="formUploadPhoto" (ngSubmit)="submit()" encType="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="file">File</label>
+                    <input formControlName="file" id="file" type="file" class="form-control"
+                        (change)="onFileChange($event)">
+                    <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                        <div *ngIf="f.file.errors.required">File is required.</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+            <!-- =========================================================== -->
+            <br>
+            <div>
+                <button mat-raised-button class="foto-descarga" type="submit" color="primary"
+                    (click)="downloadImage()">Download
+                    Photo</button>
+            </div>
+            <mat-card style="margin-top: 10px;">
+                <form [formGroup]="form">
+                    <br>
+
+                    <mat-grid-list cols="4" rowHeight="70px">
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <mat-form-field class="ancho">
+                                <mat-label>Name</mat-label>
+                                <input matInput autocomplete="off" type="text" formControlName="name" required
+                                    [(ngModel)]="user.name">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <mat-form-field class="ancho">
+                                <mat-label>Last Name</mat-label>
+                                <input matInput autocomplete="off" type="text" formControlName="lastName"
+                                    [(ngModel)]="user.lastName">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <mat-form-field class="ancho">
+                                <mat-label>Username</mat-label>
+                                <input matInput autocomplete="off" type="text" formControlName="username"
+                                    [(ngModel)]="user.username">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <mat-form-field class="ancho">
+                                <mat-label>Email</mat-label>
+                                <input matInput autocomplete="off" type="email" formControlName="email"
+                                    [(ngModel)]="user.email">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <mat-form-field class="ancho">
+                                <mat-label>Phone</mat-label>
+                                <input matInput autocomplete="off" type="tel" formControlName="phone"
+                                    [(ngModel)]="user.phone">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+
+                        <br>
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <button mat-raised-button type="submit" color="primary" (click)="updateProfile()">Update
+                                your info</button>
+                        </mat-grid-tile>
+                        <br>
+
+                    </mat-grid-list>
+                    <br>
+                </form>
+
+
+            </mat-card>
+        </mat-tab>
+
+
+
+        <mat-tab label="Change your password">
+            <mat-card style="margin-top: 10px;">
+
+                <form [formGroup]="formPassword">
+                    <br>
+                    <mat-grid-list cols="4" rowHeight="70px">
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+                            <mat-form-field class="ancho">
+                                <mat-label>New Password</mat-label>
+                                <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                                <input matInput #password [type]="toggle.type" type="password" autocomplete="off"
+                                    type="password" formControlName="newPassword">
+                                <mat-hint>{{newPassword.value.length}}/15</mat-hint>
+
+                                <!-- Esto es para mostrar a manera de carga lo que si se tiene -->
+                                <mat-password-strength #passwordComponent
+                                    (onStrengthChanged)="onStrengthChangeds($event)" [password]="newPassword.value">
+                                </mat-password-strength>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <mat-form-field class="ancho">
+                                <mat-label>Confirm Password</mat-label>
+                                <input matInput #password [type]="toggle.type" type="password" autocomplete="off"
+                                    type="password" formControlName="confirmPassword">
+                                <mat-hint>{{newPassword.value.length}}/15</mat-hint>
+                                <mat-password-strength #passwordComponent
+                                    (onStrengthChanged)="onStrengthChangeds($event)" [password]="confirmPassword.value">
+                                </mat-password-strength>
+                                <mat-error
+                                    *ngIf="confirmPassword.value !== newPassword.value && (confirmPassword.touched || confirmPassword.dirty)">
+                                    Las contraseñas no coinciden</mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <button mat-raised-button [disabled]="formPassword.invalid" type="submit" color="primary"
+                                (click)="updateUserPassword()">Update password</button>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <!-- Con esto mostramos las reglas de construccion del password-->
+                            <button class="example-margin" mat-raised-button type="submit" color="primary"
+                                (click)="showDetails = true">validate password
+                            </button>
+
+                        </mat-grid-tile>
+
+                        <mat-grid-tile [colspan]="1" [rowspan]="4">
+                            <mat-password-strength-info *ngIf="showDetails" class="expand" [min]="8" [max]="15"
+                                [lowerCaseCriteriaMsg]="'Contiene al menos una minúscula'"
+                                [upperCaseCriteriaMsg]="'Contiene al menos una mayúscula'"
+                                [specialCharsCriteriaMsg]="'Contiene un caracter especial'"
+                                [digitsCriteriaMsg]="'Contiene al menos un número'"
+                                [minCharsCriteriaMsg]="'Logitud minima de minima de 8 caracteres, máxima de 15'"
+                                [passwordComponent]="passwordComponent">
+                            </mat-password-strength-info>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </form>
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
+</div>

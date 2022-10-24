@@ -1,0 +1,37 @@
+.ancho{
+    width: 90%;
+}
+
+.example-stretched-tabs {
+    max-width: 800px;
+    background-color: white;
+  }
+
+  .fotoControl{
+    max-width: 25%;
+    max-height: 25%;
+    display:block;
+    margin:auto;
+  }
+
+  .foto-perfil {
+    display:block;
+    margin:auto;
+    color: gray;
+    left: auto;
+}
+
+
+.foto-descarga {
+  display:block;
+  margin:auto;
+  color: white;
+  left: auto;
+}
+
+.mensaje {
+  display:block;
+  margin:auto;
+  color: black;
+  left: auto;
+}

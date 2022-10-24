@@ -1,0 +1,79 @@
+<div class="container">
+  <mat-toolbar>
+      <span>Users</span>
+      <div class="example-spacer"></div>
+          <button mat-raised-button class="demo-button" color="primary" routerLink="/dashboard/create-user">
+              Add New User
+          </button>
+          <button mat-raised-button class="demo-button" color="primary" (click)="downloadUsersInfo()">
+            Download Users Report
+        </button>
+  </mat-toolbar>
+
+  <br>
+
+
+  <table mat-table [dataSource]="dataSource" class="example-container mat-elevation-z8 demo-table">
+
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="lastname">
+          <th mat-header-cell *matHeaderCellDef>LastName</th>
+          <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let element">{{element.email}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef>Username</th>
+          <td mat-cell *matCellDef="let element">{{element.username}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef>Role</th>
+          <td mat-cell *matCellDef="let element">{{element.role.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">{{element.status}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let user;">
+            <button mat-raised-button style="margin: 10px" color="primary" focusable="false" (click)="updateUser(user.id)">
+              Update
+            </button>
+            <button mat-raised-button style="margin: 10px" color="warn" focusable="false" (click)="deleteUser(user.id)">
+              Delete
+            </button>
+            <button mat-raised-button style="margin: 10px" color="accent" focusable="false" (click)="changeStatus(user.id)">
+              activate / deactivate
+            </button>
+          </td>
+        </ng-container>
+
+      <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let user;">
+          </td>
+        </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 12]" [pageSize]="12" [showFirstLastButtons]="true"></mat-paginator>
+
+</div>
